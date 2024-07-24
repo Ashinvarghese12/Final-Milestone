@@ -1,3 +1,4 @@
+import { debounce } from '@mui/material';
 import { useState, useEffect } from 'react';
 
 const Sidebar = ({ setCategory, setPriceRange, setName }) => {
@@ -31,11 +32,11 @@ const Sidebar = ({ setCategory, setPriceRange, setName }) => {
     setPriceRange([minPrice, maxPrice]);
   };
 
-  const handleNameChange = (e) => {
+  const handleNameChange = debounce((e) => {
     const name = e.target.value;
     setSearchName(name);
     setName(name);
-  };
+  },2000);
 
   const clearFilters = () => {
     setSelectedCategory('');
@@ -48,7 +49,7 @@ const Sidebar = ({ setCategory, setPriceRange, setName }) => {
   };
 
   return (
-    <div className="bg-gray-100 h-full sticky left-10 border px-14 py-10 rounded-lg  shadow-lg w-96">
+    <div className="bg-gray-100 h-fit sticky left-10 border px-14 py-10 rounded-lg  shadow-lg w-96">
       <h2 className="text-2xl text-black font-bold mb-4">Filter Products</h2>
       <div className="mb-4">
         <h3 className="font-bold text-black mb-2">Category</h3>
@@ -58,7 +59,7 @@ const Sidebar = ({ setCategory, setPriceRange, setName }) => {
           onChange={handleCategoryChange}
         >
           <option value="">All Categories</option>
-          {categories.map(category => (
+          {categories.slice(0, 5).map(category => (
             <option key={category.id} value={category.name}>{category.name}</option>
           ))}
         </select>
@@ -69,7 +70,11 @@ const Sidebar = ({ setCategory, setPriceRange, setName }) => {
           type="text"
           className="w-64 bg-white text-black border rounded-xl py-3 p-2"
           value={searchName}
-          onChange={handleNameChange}
+          // onChange={handleNameChange}
+          onChange={(e) => {
+            setSearchName(e.target.value)
+            handleNameChange(e)
+          }}
           placeholder="Search by name"
         />
       </div>

@@ -4,6 +4,7 @@ import TableRow from '@mui/material/TableRow';
 import { IconButton } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
+import IMAGE from '../../public/image/icon.png'
 
 const ProductCard = ({ product, onEdit, onDelete }) => {
   const cleanUrlString = (url) => {
@@ -13,7 +14,8 @@ const ProductCard = ({ product, onEdit, onDelete }) => {
     <TableRow hover role="checkbox" tabIndex={-1} key={product.id}>
       <TableCell sx={{fontSize: '1.11rem', fontFamily: 'serif' }}>{product.id}</TableCell>
       <TableCell>
-        <img src={cleanUrlString(product.images[0])} alt={product.title} style={{ height: '50px', width: '50px', borderRadius:'20px' }} />
+        <img src={cleanUrlString(product.images[0]) || IMAGE} alt={product.title} style={{ height: '50px', width: '50px', borderRadius:'20px' }} />
+        {/* <img src={IMAGE} alt={product.title} style={{ height: '50px', width: '50px', borderRadius:'20px' }} /> */}
       </TableCell>
       <TableCell sx={{fontSize: '1.11rem', fontFamily: 'serif' }}>{product.title}</TableCell>
       <TableCell sx={{fontSize: '1.11rem', fontFamily: 'serif' }}>{product.category?.name}</TableCell>

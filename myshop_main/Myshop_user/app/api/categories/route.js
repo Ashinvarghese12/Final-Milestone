@@ -1,4 +1,3 @@
-// app/api/categories/route.js
 export async function GET() {
     try {
       const res = await fetch('https://api.escuelajs.co/api/v1/categories');

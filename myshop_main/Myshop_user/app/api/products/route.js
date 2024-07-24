@@ -2,7 +2,7 @@ export async function GET(request) {
   try {
     const apiUrl = 'https://api.escuelajs.co/api/v1/products';
 
-    console.log(`Fetching products from: ${apiUrl}`); // Debug log
+    console.log(`Fetching products from: ${apiUrl}`); 
     const res = await fetch(apiUrl);
 
     if (!res.ok) {
